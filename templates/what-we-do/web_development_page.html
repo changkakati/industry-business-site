@@ -1,0 +1,425 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+
+
+{% block style %}
+  <link rel="stylesheet" href="{% static 'css/web_development_page.css' %}" />
+{% endblock %}
+
+
+{% block main %}
+  {# ============ HERO ============ #}
+  <section class="relative min-h-screen overflow-hidden flex items-center font-['Didact_Gothic']">
+    <!-- BACKGROUND -->
+    <div class="absolute inset-0 overflow-hidden">
+      <video class="hero-bg absolute inset-0 w-full h-full object-cover" autoplay muted loop playsinline preload="auto">
+        <source src="{% static 'videos/Web-Dev-Background.mp4' %}" type="video/mp4" />
+      </video>
+
+      <!-- LIGHTENED OVERLAYS -->
+      <div class="absolute inset-0 bg-slate-950/30"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-950/70 via-slate-950/30 to-transparent"></div>
+    </div>
+
+    <!-- GRID OVERLAY -->
+    <div class="hero-grid absolute inset-0 opacity-5" style="background-image: linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px), linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px); background-size:60px 60px;"></div>
+
+    <!-- FLOATING GLOW WITH PARALLAX -->
+    <div class="hero-light absolute -top-40 right-0 w-[700px] h-[700px] rounded-full bg-blue-500/10 blur-[150px] pointer-events-none"></div>
+    <div class="hero-light2 absolute bottom-0 -left-40 w-[500px] h-[500px] rounded-full bg-cyan-500/10 blur-[120px] pointer-events-none"></div>
+
+    <!-- CONTENT -->
+    <div class="relative z-10 w-full max-w-[1600px] mx-auto px-6 lg:px-12 py-20">
+      <!-- Breadcrumb -->
+      <div class="hero-anim flex items-center gap-2 text-white/70 text-sm mb-8">
+        <a href="/" class="hover:text-white transition">Home</a>
+        <span>/</span>
+        <span class="text-white">Web Development</span>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-16 items-center">
+        <!-- LEFT -->
+        <div class="lg:col-span-7">
+          <span class="hero-anim uppercase tracking-[0.4em] text-blue-400 text-xs font-semibold drop-shadow-md">SERVICES / DIGITAL MODERNIZATION</span>
+
+          <h1 class="hero-anim mt-6 text-white text-5xl md:text-6xl xl:text-7xl font-bold leading-tight drop-shadow-lg">
+            Enterprise Web Applications
+            <span class="block text-blue-400 drop-shadow-md">Engineered for Scale.</span>
+          </h1>
+
+          <p class="hero-anim mt-8 max-w-2xl text-white/90 text-lg leading-8 drop-shadow">We design, modernize, and engineer mission-critical digital platforms, secure customer portals, and enterprise web solutions that accelerate business transformation.</p>
+
+          <div class="hero-anim mt-10 flex flex-wrap gap-4">
+            <a href="#" class="px-8 py-4 rounded-full bg-blue-600 hover:bg-blue-700 transition text-white font-medium shadow-lg">Talk to an Architect</a>
+            <a href="#capabilities" class="px-8 py-4 rounded-full border border-white/30 text-white hover:bg-white/10 backdrop-blur-sm transition font-medium">View Capabilities &rarr;</a>
+          </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="lg:col-span-5 flex justify-end">
+          <div class="hero-card w-full max-w-lg rounded-3xl border border-white/20 bg-slate-900/40 backdrop-blur-md p-8 shadow-[0_30px_80px_rgba(0,0,0,.5)] transition-all duration-300">
+            <div class="h-1 w-20 bg-blue-500 rounded-full mb-6"></div>
+            <div class="overflow-hidden rounded-2xl mb-6">
+              <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=80" class="w-full h-52 object-cover" alt="Team collaborating" />
+            </div>
+
+            <!-- STATS -->
+            <div class="grid grid-cols-2 gap-6">
+              <div class="hero-stat">
+                <h2 class="text-4xl font-bold text-white" data-counter="120" data-suffix="+">0</h2>
+                <p class="mt-2 text-sm text-white/80">Global Deployments</p>
+              </div>
+              <div class="hero-stat">
+                <h2 class="text-4xl font-bold text-white" data-counter="99.99" data-suffix="%">0</h2>
+                <p class="mt-2 text-sm text-white/80">Platform SLA Uptime</p>
+              </div>
+              <div class="hero-stat">
+                <h2 class="text-4xl font-bold text-white" data-counter="18" data-suffix="+">0</h2>
+                <p class="mt-2 text-sm text-white/80">Industries Served</p>
+              </div>
+              <div class="hero-stat">
+                <h2 class="text-4xl font-bold text-white" data-counter="24" data-suffix="/7">0</h2>
+                <p class="mt-2 text-sm text-white/80">Global Support Desk</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {# ============ TECH MARQUEE ============ #}
+  <section class="bg-white border-b border-gray-100 py-8 sm:py-10 font-['Didact_Gothic'] overflow-hidden">
+    <div class="max-w-[1600px] mx-auto px-5 sm:px-6 lg:px-10 2xl:px-16">
+        <p class="text-center text-[10px] sm:text-xs uppercase tracking-[0.3em] sm:tracking-[0.35em] text-gray-400 mb-6 sm:mb-8">
+            Enterprise Technologies &amp; Stacks
+        </p>
+
+        <div class="relative overflow-hidden [mask-image:_linear-gradient(to_right,_transparent_0,_black_128px,_black_calc(100%-128px),_transparent_100%)]">
+            <div class="flex items-center gap-12 sm:gap-16 lg:gap-20 w-max animate-marquee">
+                {% for tech in tech_stack %}
+                    <img src="{{ tech.url }}" alt="{{ tech.name }}"
+                        class="h-8 sm:h-10 w-auto opacity-90 hover:opacity-100 transition shrink-0">
+                {% endfor %}
+                {% for tech in tech_stack %}
+                    <img src="{{ tech.url }}" alt="{{ tech.name }}"
+                        class="h-8 sm:h-10 w-auto opacity-90 hover:opacity-100 transition shrink-0">
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+  {# ============ OVERVIEW ============ #}
+  <section class="py-12 md:py-20 lg:py-24 bg-white font-['Didact_Gothic']">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-center">
+        <!-- LEFT COLUMN -->
+        <div class="reveal-element lg:col-span-6 xl:col-span-7 flex flex-col justify-center">
+          <span class="uppercase tracking-[0.35em] text-xs text-blue-600 font-semibold">Overview</span>
+
+          <h2 class="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 leading-tight tracking-tight">Websites and applications that power mission-critical operations.</h2>
+
+          <p class="mt-5 text-base sm:text-lg leading-relaxed text-gray-600">An enterprise digital presence is more than design &mdash; it’s a high-availability business interface connecting customers, employees, suppliers, and core operations. Our teams work as an extension of your IT leadership, turning business requirements into scalable architecture, clean code, and resilient platforms.</p>
+
+          <p class="mt-4 text-base sm:text-lg leading-relaxed text-gray-600">We embed industrial-grade engineering practices &mdash; multi-stage CI/CD pipelines, automated security scanning, containerized orchestration, and rigorous QA &mdash; ensuring long-term maintainability and uninterrupted uptime.</p>
+
+          <div class="mt-8 grid grid-cols-2 gap-6 pt-2 border-t border-gray-100">
+            <div class="border-l-2 border-blue-600 pl-4">
+              <h3 class="text-2xl font-bold text-slate-900">2014</h3>
+              <p class="text-sm text-gray-500 mt-1">Delivering web platforms since</p>
+            </div>
+            <div class="border-l-2 border-blue-600 pl-4">
+              <h3 class="text-2xl font-bold text-slate-900">ISO 27001 / SOC2</h3>
+              <p class="text-sm text-gray-500 mt-1">Aligned security governance</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="reveal-element stagger-2 lg:col-span-6 xl:col-span-5 w-full flex items-center justify-center">
+          <div class="w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl bg-slate-100 aspect-[4/3] lg:aspect-square xl:aspect-[4/3]">
+            <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=1200&auto=format&fit=crop&q=80" alt="Developers reviewing code on multiple screens" class="w-full h-full object-cover" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {# ============ ARCHITECTURE TAB SWITCHER (LIGHT BACKGROUND) ============ #}
+  <section class="py-16 md:py-24 bg-slate-50 text-slate-900 font-['Didact_Gothic'] border-t border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-10">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="uppercase tracking-[0.35em] text-xs text-blue-600 font-semibold">Technical Blueprint</span>
+        <h2 class="mt-3 text-3xl sm:text-4xl font-bold text-slate-900">Enterprise Architecture Layers</h2>
+      </div>
+
+      <!-- TABS -->
+      <div class="flex flex-wrap justify-center gap-3 mb-10">
+        <button type="button" class="tab-btn active px-6 py-3 rounded-full border border-blue-600 bg-blue-600 text-white font-medium text-sm transition shadow-sm" data-target="backend">Backend & Microservices</button>
+        <button type="button" class="tab-btn px-6 py-3 rounded-full border border-gray-200 bg-white text-slate-700 hover:border-blue-500 font-medium text-sm transition shadow-sm" data-target="frontend">Frontend & Headless DXP</button>
+        <button type="button" class="tab-btn px-6 py-3 rounded-full border border-gray-200 bg-white text-slate-700 hover:border-blue-500 font-medium text-sm transition shadow-sm" data-target="cloud">DevSecOps & Cloud</button>
+      </div>
+
+      <!-- TAB CONTENT PANELS -->
+      <div class="bg-white border border-gray-200/90 rounded-3xl p-8 md:p-12 shadow-sm">
+        <div class="tab-content block" id="backend">
+          <div class="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h3 class="text-2xl font-bold text-slate-900 mb-4">High-Throughput Core Systems</h3>
+              <p class="text-slate-600 text-sm leading-relaxed mb-6">We build scalable REST and GraphQL microservices architectures using Laravel, Node.js, and Java Spring. Designed for enterprise transactional loads with automated failovers and fault isolation.</p>
+              <ul class="space-y-3 text-sm text-slate-700">
+                <li class="flex items-center gap-3">
+                  <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                  Distributed Caching & Queuing (Redis, RabbitMQ)
+                </li>
+                <li class="flex items-center gap-3">
+                  <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                  Event-Driven Architecture (Kafka)
+                </li>
+                <li class="flex items-center gap-3">
+                  <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                  Real-Time Analytics & Auditing Logs
+                </li>
+              </ul>
+            </div>
+            <div class="rounded-2xl bg-slate-900 p-6 border border-slate-800 font-mono text-xs text-blue-300 overflow-x-auto shadow-inner">
+              <code>
+                // Enterprise Gateway Router<br />
+                Route::middleware(['auth:sanctum', 'rate-limit:enterprise'])->group(function() {<br />
+                &nbsp;&nbsp;Route::post('/v2/ledger/transact', [LedgerController::class, 'process']);<br />
+                &nbsp;&nbsp;Route::get('/v2/telemetry/health', [SystemHealthController::class, 'ping']);<br />
+                });
+              </code>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content hidden" id="frontend">
+          <div class="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h3 class="text-2xl font-bold text-slate-900 mb-4">Decoupled & Modern Frontends</h3>
+              <p class="text-slate-600 text-sm leading-relaxed mb-6">Modular React, Next.js, and Vue interfaces designed for lightning-fast dynamic rendering, strict WCAG 2.1 AA accessibility standards, and zero layout shift.</p>
+              <ul class="space-y-3 text-sm text-slate-700">
+                <li class="flex items-center gap-3">
+                  <span class="w-2 h-2 rounded-full bg-cyan-600"></span>
+                  Server-Side Rendering (SSR) & Static Generation
+                </li>
+                <li class="flex items-center gap-3">
+                  <span class="w-2 h-2 rounded-full bg-cyan-600"></span>
+                  Design Systems & Tailwind CSS Governance
+                </li>
+                <li class="flex items-center gap-3">
+                  <span class="w-2 h-2 rounded-full bg-cyan-600"></span>
+                  Progressive Web App (PWA) Offline Sync
+                </li>
+              </ul>
+            </div>
+            <div class="rounded-2xl bg-slate-900 p-6 border border-slate-800 font-mono text-xs text-cyan-300 overflow-x-auto shadow-inner">
+              <code>
+                export async function getStaticProps({ params }) {<br />
+                &nbsp;&nbsp;const platformData = await fetchEnterpriseDXP(params.id);<br />
+                &nbsp;&nbsp;return { props: { platformData }, revalidate: 60 };<br />
+                }
+              </code>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content hidden" id="cloud">
+          <div class="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h3 class="text-2xl font-bold text-slate-900 mb-4">Automated CI/CD & Cloud Orchestration</h3>
+              <p class="text-slate-600 text-sm leading-relaxed mb-6">Fully automated containerized infrastructure (Docker & Kubernetes) running on AWS or Azure with automated SAST security scanning and zero-downtime deployment pipelines.</p>
+              <ul class="space-y-3 text-sm text-slate-700">
+                <li class="flex items-center gap-3">
+                  <span class="w-2 h-2 rounded-full bg-emerald-600"></span> Infrastructure as Code (Terraform)
+                </li>
+                <li class="flex items-center gap-3">
+                  <span class="w-2 h-2 rounded-full bg-emerald-600"></span> Automated Penetration & Vulnerability Scans
+                </li>
+                <li class="flex items-center gap-3">
+                  <span class="w-2 h-2 rounded-full bg-emerald-600"></span> Multi-Region High Availability Failover
+                </li>
+              </ul>
+            </div>
+            <div class="rounded-2xl bg-slate-900 p-6 border border-slate-800 font-mono text-xs text-emerald-300 overflow-x-auto shadow-inner">
+              <code>
+                apiVersion: apps/v1<br />
+                kind: Deployment<br />
+                metadata:<br />
+                &nbsp;&nbsp;name: enterprise-web-cluster<br />
+                spec:<br />
+                &nbsp;&nbsp;replicas: 12<br />
+                &nbsp;&nbsp;strategy: { type: RollingUpdate }
+              </code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {# ============ INDUSTRIES WE SERVE ============ #}
+  {# ============ CAPABILITIES ============ #}
+<section id="capabilities" class="py-16 md:py-24 xl:py-28 bg-slate-50 font-['Didact_Gothic']">
+    <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-10 xl:px-16">
+        <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16 xl:mb-20">
+            <span class="uppercase tracking-[0.35em] text-[10px] sm:text-xs text-blue-600 font-semibold">What We
+                Deliver</span>
+            <h2 class="mt-4 md:mt-5 text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+                Capabilities Across the Modern Web Stack
+            </h2>
+            <p class="mt-5 md:mt-6 text-base sm:text-lg text-gray-600 leading-7 sm:leading-8">
+                From enterprise architecture design to full-lifecycle managed services, we bring industrial rigor to web
+                engineering.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for cap in capabilities %}
+                <article
+                    class="reveal-element stagger-{{ cap.stagger }} group overflow-hidden rounded-3xl bg-white border border-gray-200 hover:border-blue-500 hover:shadow-2xl transition-all duration-500">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="{{ cap.img }}" alt="{{ cap.title|striptags }}"
+                            class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                    </div>
+                    <div class="p-6 sm:p-8">
+                        <h3 class="text-lg sm:text-xl font-semibold text-slate-900">{{ cap.title|safe }}</h3>
+                        <p class="mt-3 text-sm sm:text-base text-gray-600 leading-relaxed">{{ cap.desc|safe }}</p>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{# ============ TECHNOLOGY USE CASES CAROUSEL ============ #}
+<section class="py-16 md:py-24 xl:py-28 bg-sky-50 font-['Didact_Gothic'] overflow-hidden">
+    <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-10 xl:px-16">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 md:mb-16">
+            <div class="max-w-2xl">
+                <span class="uppercase tracking-[0.35em] text-[10px] sm:text-xs text-blue-600 font-semibold">Technology
+                    in Action</span>
+                <h2 class="mt-4 md:mt-5 text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 leading-tight">
+                    Real Use Cases Across Our Stack
+                </h2>
+                <p class="mt-5 text-base sm:text-lg text-slate-600 leading-7 sm:leading-8">
+                    A closer look at how each technology in our stack solves a specific enterprise problem.
+                </p>
+            </div>
+
+            <!-- CAROUSEL CONTROLS -->
+            <div class="flex items-center gap-3 shrink-0">
+                <button type="button" id="useCasePrev" aria-label="Previous"
+                    class="w-11 h-11 rounded-full border border-blue-200 bg-white text-blue-600 flex items-center justify-center hover:bg-blue-600 hover:text-white hover:border-blue-600 transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <button type="button" id="useCaseNext" aria-label="Next"
+                    class="w-11 h-11 rounded-full border border-blue-200 bg-white text-blue-600 flex items-center justify-center hover:bg-blue-600 hover:text-white hover:border-blue-600 transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- TRACK -->
+        <div id="useCaseTrack"
+            class="flex gap-6 overflow-x-auto pb-6 snap-x snap-mandatory scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {% for uc in use_cases %}
+                <article
+                    class="useCaseCard reveal-element snap-start shrink-0 w-[280px] sm:w-[340px] rounded-3xl bg-white border border-blue-100 shadow-sm hover:shadow-xl hover:border-blue-300 transition-all duration-500 overflow-hidden">
+                    <div class="relative h-44 sm:h-48 overflow-hidden">
+                        <img src="{{ uc.img }}" alt="{{ uc.title }}"
+                            class="w-full h-full object-cover transition duration-700 hover:scale-110">
+                        <span
+                            class="absolute top-4 left-4 px-3 py-1 rounded-full bg-white/90 backdrop-blur text-blue-700 text-xs font-semibold shadow">
+                            {{ uc.tech }}
+                        </span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-semibold text-slate-900">{{ uc.title }}</h3>
+                        <p class="mt-2 text-sm text-slate-600 leading-relaxed">{{ uc.desc }}</p>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+{# ============ PROCESS / DELIVERY FRAMEWORK (AUTO IMAGE SLIDER) ============ #}
+<section class="py-16 md:py-24 xl:py-28 bg-slate-50 font-['Didact_Gothic']">
+    <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-10 xl:px-16">
+        <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+            <span class="uppercase tracking-[0.35em] text-[10px] sm:text-xs text-blue-600 font-semibold">Delivery
+                Governance</span>
+            <h2 class="mt-4 md:mt-5 text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+                Structured Enterprise Delivery Framework
+            </h2>
+            <p class="mt-4 text-gray-600 text-sm sm:text-base">
+                Our lifecycle engineering stages, from discovery through continuous evolution.
+            </p>
+        </div>
+
+        <!-- SLIDER -->
+        <div class="relative rounded-3xl overflow-hidden shadow-2xl group" id="deliverySlider">
+            <div class="flex transition-transform duration-700 ease-out" id="deliveryTrack">
+                {% for p in process_steps %}
+                    <div class="relative w-full shrink-0 h-[420px] sm:h-[480px] lg:h-[540px]">
+                        <img src="{{ p.img }}" alt="{{ p.title }}"
+                            class="absolute inset-0 w-full h-full object-cover">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/55 to-slate-950/10">
+                        </div>
+
+                        <div class="relative z-10 h-full flex flex-col justify-end p-8 sm:p-12 lg:p-16">
+                            <div
+                                class="w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-lg mb-6 shadow-lg">
+                                {{ p.step }}
+                            </div>
+                            <h3 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 drop-shadow">
+                                {{ p.title }}</h3>
+                            <p class="text-white/85 text-sm sm:text-base max-w-xl leading-relaxed drop-shadow">
+                                {{ p.desc }}
+                            </p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- Prev / Next Arrows -->
+            <button type="button" id="deliveryPrev" aria-label="Previous Step"
+                class="opacity-0 group-hover:opacity-100 absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 hover:bg-white/25 backdrop-blur-sm border border-white/30 text-white flex items-center justify-center transition-all duration-300 z-20">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+            <button type="button" id="deliveryNext" aria-label="Next Step"
+                class="opacity-0 group-hover:opacity-100 absolute right-4 sm:right-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 hover:bg-white/25 backdrop-blur-sm border border-white/30 text-white flex items-center justify-center transition-all duration-300 z-20">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+
+            <!-- Dots -->
+            <div class="absolute bottom-6 sm:bottom-8 right-8 sm:right-12 flex gap-2 z-20" id="deliveryDots">
+                {% for p in process_steps %}
+                    <button type="button" data-slide="{{ forloop.counter0 }}"
+                        aria-label="Go to step {{ forloop.counter }}"
+                        class="h-2.5 rounded-full transition-all duration-300 {% if forloop.first %}w-6 bg-blue-500{% else %}w-2.5 bg-white/40 hover:bg-white/70{% endif %}">
+                    </button>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+
+{% block script %}
+ <script src="{% static "js/web_development_page.js" %}"></script>
+{% endblock  %}
